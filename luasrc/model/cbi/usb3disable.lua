@@ -7,7 +7,7 @@ s.anonymous=true
 s.addremove=false
 e=sys.exec("cat /etc/modules.d/$(ls /etc/modules.d | grep usb3) >/tmp/run/usb3module ; lsmod | awk '{gsub(\"_\",\"-\",$1);print $1}' >>/tmp/run/usb3module ; sort /tmp/run/usb3module | uniq -d | sort -n ; rm /tmp/run/usb3module")
 if e=="" then
-	o=s:option(Button,"enabled",translate("立即开启"))
+	o=s:option(Button,"enabled",translate("立即用"))
 	o.optional=false
 	o.inputtitle=translate("enable")
 	o.write=function()
@@ -15,7 +15,7 @@ if e=="" then
 		luci.http.redirect(luci.dispatcher.build_url("admin","system","usb3disable"))
 	end
 else
-	o=s:option(Button,"disabled",translate("立即关闭"))
+	o=s:option(Button,"disabled",translate("立即停用"))
 	o.optional=false
 	o.inputtitle=translate("Disable")
 	o.write=function()
@@ -25,7 +25,7 @@ else
 end
 d=sys.exec("ls /etc/modules-boot.d | grep usb3")
 if d=="" then
-	o=s:option(Button,"enabledstartup",translate("开机时开启"))
+	o=s:option(Button,"enabledstartup",translate("开机时启用"))
 	o.optional=false
 	o.inputtitle=translate("Enable")
 	o.write=function()
@@ -33,7 +33,7 @@ if d=="" then
 		luci.http.redirect(luci.dispatcher.build_url("admin","system","usb3disable"))
 	end
 else
-o=s:option(Button,"disabledstartup",translate("开机时关闭"))
+o=s:option(Button,"disabledstartup",translate("开机时停用"))
 	o.optional=false
 	o.inputtitle=translate("Disable")
 	o.write=function()
