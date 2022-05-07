@@ -7,7 +7,7 @@ s.anonymous=true
 s.addremove=false
 e=sys.exec("cat /etc/modules.d/$(ls /etc/modules.d | grep usb3) >/tmp/run/usb3module ; lsmod | awk '{gsub(\"_\",\"-\",$1);print $1}' >>/tmp/run/usb3module ; sort /tmp/run/usb3module | uniq -d | sort -n ; rm /tmp/run/usb3module")
 if e=="" then
-	o=s:option(Button,"enabled",translate("立即用"))
+	o=s:option(Button,"enabled",translate("立即启用"))
 	o.optional=false
 	o.inputtitle=translate("enable")
 	o.write=function()
